@@ -1,0 +1,15 @@
+[package]
+name = "cargo-mirror"
+version = "0.1.0"
+authors = ["tennix <ztennix@gmail.com>"]
+
+[[bin]]
+name = "cargo-mirror"
+
+[dependencies]
+toml = "0.1.25"
+rustc-serialize = "0.3"
+curl = "0.2.14"
+rust-crypto = "^0.2"
+cargo = "0.6.1"
+lazy_static = "0.1.*"
