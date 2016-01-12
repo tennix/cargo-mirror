@@ -91,7 +91,13 @@ impl<'a> Crate<'a> {
     }
 
     fn download(&mut self) -> bool {
-        let url = format!("{}/{}-{}.crate", *CARGO_MIRROR, self.name, self.version);
+        let path = match self.name.len() {
+            1 => format!("1/{}", self.name),
+            2 => format!("2/{}", self.name),
+            3 => format!("3/{}/{}", &self.name[..1], self.name),
+            _ => format!("{}/{}/{}", &self.name[0..2], &self.name[2..4], self.name),
+        };
+        let url = format!("{}/{}/{}-{}.crate", *CARGO_MIRROR, path, self.name, self.version);
         let resp = http::handle()
             .get(&url[..])
             .exec().unwrap();
